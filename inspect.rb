@@ -26,7 +26,7 @@ def get_post_data(browser, site, post_number, index)
   mp3_file_size = browser.input(:id => "podPressMedia_0_size").value
   mp3_duration = browser.input(:id => "podPressMedia_0_duration").value
   mp3_itunes_author = browser.input(:name => "iTunesAuthor").value
-  puts "#{index},#{url},#{title},#{permalink},#{text},#{categories(browser)},#{tags(browser)},#{mp3_location},#{mp3_title},#{mp3_type},#{mp3_file_size},#{mp3_duration},#{mp3_itunes_author}"
+  puts "#{index}@#{url}@#{title}@#{permalink}@#{text}@#{categories(browser)}@#{tags(browser)}@#{mp3_location}@#{mp3_title}@#{mp3_type}@#{mp3_file_size}@#{mp3_duration}@#{mp3_itunes_author}"
 end
 
 if __FILE__ == $0
