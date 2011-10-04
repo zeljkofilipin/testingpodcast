@@ -1,7 +1,7 @@
-def log_in(browser, site)
+def log_in(browser, site, password)
   browser.goto "#{site}wp-login.php"
-  browser.text_field(:id => "user_login").set "" # enter user name
-  browser.text_field(:id => "user_pass").set "" # enter password
+  browser.text_field(:id => "user_login").set "zeljko.filipin"
+  browser.text_field(:id => "user_pass").set password
   browser.button(:id => "wp-submit").click
 end
 def get_post_numbers(browser, site)
@@ -10,10 +10,16 @@ def get_post_numbers(browser, site)
     post.a(:text => "Edit").href.split("=")[1].split("&")[0]
   end
 end
-require "watir-webdriver"
 
-site = "http://testingpodcast.com/"
-browser = Watir::Browser.new :ff
+if __FILE__ == $0
+  require "watir-webdriver"
 
-log_in(browser, site)
-puts get_post_numbers(browser, site).inspect
+  site = "http://testingpodcast.com/"
+  browser = Watir::Browser.new :ff
+  password = ARGV[0]
+
+  log_in(browser, site, password)
+  puts get_post_numbers(browser, site).inspect
+end
+
+
