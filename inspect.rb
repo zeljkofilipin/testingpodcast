@@ -18,7 +18,10 @@ def get_post_data(browser, site, post_number, index)
   browser.goto "#{site}wp-admin/post.php?post=#{post_number}&action=edit"
   url = browser.url
   title = browser.input(:id => "title").value
-  permalink = browser.span(:id => "editable-post-name").text
+
+  browser.span(:id => "editable-post-name").click
+  permalink = browser.input(:id => "new-post-slug").value
+
   text = browser.textarea(:id => "content").text
   mp3_location = browser.input(:id => "podPressMedia_0_URI").value
   mp3_title = browser.input(:id => "podPressMedia_0_title").value
