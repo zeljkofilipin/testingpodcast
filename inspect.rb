@@ -46,6 +46,7 @@ if __FILE__ == $0
   browser = Watir::Browser.new :ff
 
   log_in(browser, site, password)
+  puts "index@url@title@permalink@text@categories@tags@mp3_location@mp3_title@mp3_type@mp3_file_size@mp3_duration@mp3_itunes_author"
   post_numbers(browser, site).each_with_index do |post_number, index|
     get_post_data(browser, site, post_number, index)
   end
