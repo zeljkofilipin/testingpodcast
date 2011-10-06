@@ -10,7 +10,13 @@ def post_numbers(browser, site)
     post.a(:text => "Edit").href.split("=")[1].split("&")[0]
   end
 end
-
+def set_itunes_author(browser, site, post_number)
+  browser.goto "#{site}wp-admin/post.php?post=#{post_number}&action=edit"
+  category = browser.ul(id: "categorychecklist").checkbox.parent.text
+  browser.select(id: "iTunesAuthorChoice").select "Insert custom value"
+  browser.text_field(name: "iTunesAuthor").set category
+  browser.button(id: "publish").click
+end
 if __FILE__ == $0
   require "watir-webdriver"
 
@@ -19,9 +25,8 @@ if __FILE__ == $0
   browser = Watir::Browser.new :ff
 
   log_in(browser, site, password)
-  post_numbers(browser, site).each_with_index do |post_number, index|
-    browser.goto "#{site}wp-admin/post.php?post=#{post_number}&action=edit"
-    puts browser.url
+  post_numbers(browser, site).each do |post_number|
+    set_itunes_author(browser, site, post_number)
   end
 end
 
