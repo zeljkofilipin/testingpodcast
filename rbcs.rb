@@ -22,7 +22,6 @@ def create_draft_post(browser, podcast, testingpodcast)
   browser.button(:id => "save-post").click
 end
 
-require "rubygems"
 require "watir-webdriver"
 
 browser = Watir::Browser.new :ff
