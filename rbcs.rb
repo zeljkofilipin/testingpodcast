@@ -21,13 +21,6 @@ def create_draft_post(browser, podcast, testingpodcast)
 
   browser.button(:id => "save-post").click
 end
-def log_in(browser, testingpodcast)
-  browser.goto "#{testingpodcast}wp-login.php"
-  browser.text_field(:id => "user_login").flash # workaround for a bug
-  browser.text_field(:id => "user_login").set "" # enter user name
-  browser.text_field(:id => "user_pass").set "" # enter password
-  browser.button(:id => "wp-submit").click
-end
 
 require "rubygems"
 require "watir-webdriver"
@@ -36,7 +29,8 @@ browser = Watir::Browser.new :ff
 site = "http://www.rbcs-us.com/software-testing-resources/podcast"
 
 testingpodcast = "http://testingpodcast.com/"
-log_in(browser, testingpodcast)
+require "login"
+log_in(browser, testingpodcast, password)
 
 require "podcast"
 numbers = (43..78)
